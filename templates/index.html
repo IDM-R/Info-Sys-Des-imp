@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>意見とフィードバック</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="add-opinion">
+        <textarea id="new-opinion" placeholder="新しい意見を入力"></textarea>
+        <button onclick="addOpinion()">追加</button>
+    </div>
+
+    <!-- 横並びで意見ボックスを表示するエリア -->
+    <div id="opinions-container">
+        <div id="opinions">
+            {% for opinion in opinions %}
+            <div class="opinion-box">
+                <textarea class="opinion-input" readonly>{{ opinion.text }}</textarea>
+                <div class="feedback-section">
+                    {% for fb in opinion.feedback %}
+                    <textarea class="feedback" readonly>{{ fb.text }} [{{ fb.timestamp }}]</textarea>
+                    {% endfor %}
+                </div>
+                <textarea class="feedback-input" placeholder="フィードバックを入力"></textarea>
+                <button onclick="addFeedback({{ loop.index0 }})">送信</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
+
+
+
