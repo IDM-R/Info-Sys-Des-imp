@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="/item/{{ item.id }}" method="POST">
+    <nav class="navbar">
+        <h1>アイディアメモ</h1>
+        <a href="/">ホームに戻る</a>
+    </nav>
+    <div class="content">
+        <div class="app">
+        {% if groups %}
+        <ul>
+        {% for group in groups %}
+            <li class="group-list"><a href="/group/{{ group.id }}">{{ group.name }}</a></li>
+        {% endfor %}
+        </ul>
+        {% else %}
+        <p>まだグループに所属していません。</p>
+        {% endif %}
+        </div>
+        <div class="item">
+            <h3>{{ group.name }}</h3>
+        <input type="text" name="item_title" placeholder="項目を入力" class="item-btn">
+        <button type="submit" id="addItemBtn">項目を追加</button>  <!-- submitに変更 -->
+        
+        {% if items %}
+        <ul>
+        {% for item in items %}
+        <li id="item-{{ item.id }}" class="item">
+            <a href="/item/{{ item.id }}" class="item-link">{{ item.title }}</a>  <!-- item.title を表示 -->
+            <form action="/group/{{ group.id }}/delete/{{ item.id }}" method="POST" style="display:inline;">
+                <button type="submit" class="btn-delete">削除</button>
+            </form>
+        </li>
+        {% endfor %}
+        </ul>
+        {% else %}
+        <p>まだ項目がありません。</p>
+        {% endif %}
+    
+        </div>
+        <div class="board">
+            <h2 id="boardTitleHeader" data-item-id="{{ item.id }}">{{ item.title }}</h2>
+            <form action="/item/{{ item.id }}" method="POST">
+                <input type="text" name="new_title" id="boardTitleInput" value="{{ item.title }}" placeholder="タイトルを入力してください">
+                <button type="submit" id="saveTitleBtn">保存</button>
+            </form>
+
+            <hr>
+
+            <!-- 新しいテーマを入力するフォーム -->
+            <form action="/item/{{ item.id }}" method="POST">
+                <input type="text" name="theme_content" id="themeInput" placeholder="テーマを入力">
+                <button type="submit">テーマを追加</button>
+            </form>
+
+        <!-- 現在のテーマを表示 -->
+        <h4>現在のテーマ:</h4>
+        <ul>
+            {% for theme in themes %}
+                <li>
+                    {{ theme.content }}
+                    <form action="/item/{{ item.id }}/delete_theme/{{ theme.id }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn-delete">削除</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h4>新しいテキストボックスを追加:</h4>
+        <form action="/item/{{ item.id }}/add_textbox" method="POST">
+            <textarea name="textbox_content" rows="10" cols="30" placeholder="内容を入力してください"></textarea>
+            <button type="submit">追加</button>
+        </form>
+
+        <h4>現在のテキストボックス:</h4>
+        <div class="textbox-container">
+            {% for textbox in textboxes %}
+                <div class="textbox-wrapper" data-textbox-id="{{ textbox.id }}">
+                    <div class="textbox-header">
+                        <span class="like-button" data-textbox-id="{{ textbox.id }}">
+                            ❤️ <span class="like-count">{{ textbox.like_count or 0 }}</span>
+                        </span>                        
+                    </div>
+                    <textarea style="width: 200px; height: 200px;" readonly>{{ textbox.content }}</textarea>
+                    <form action="/item/{{ item.id }}/delete_textbox/{{ textbox.id }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn-delete">削除</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</form>
+{% endblock %}
