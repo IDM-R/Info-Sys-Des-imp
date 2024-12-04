@@ -19,8 +19,11 @@
         </div>
         <div class="item">
             <h3>{{ group.name }}</h3>
-        <input type="text" name="item_title" placeholder="項目を入力" class="item-btn">
-        <button type="submit" id="addItemBtn">項目を追加</button>  <!-- submitに変更 -->
+            <form action="/item/{{ item.id }}" method="POST">
+                <input type="hidden" name="action" value="add_item"> <!-- フォームの種類を指定 -->
+                <input type="text" name="item_title" placeholder="項目を入力" class="item-btn">
+                <button type="submit" id="addItemBtn">項目を追加</button>
+            </form>  <!-- submitに変更 -->
         
         {% if items %}
         <ul>
@@ -49,6 +52,7 @@
 
             <!-- 新しいテーマを入力するフォーム -->
             <form action="/item/{{ item.id }}" method="POST">
+                <input type="hidden" name="action" value="add_theme"> <!-- フォームの種類を指定 -->
                 <input type="text" name="theme_content" id="themeInput" placeholder="テーマを入力">
                 <button type="submit">テーマを追加</button>
             </form>
@@ -66,13 +70,14 @@
             {% endfor %}
         </ul>
 
-        <h4>新しいテキストボックスを追加:</h4>
+        <h4>新しい付箋を追加:</h4>
         <form action="/item/{{ item.id }}/add_textbox" method="POST">
             <textarea name="textbox_content" rows="10" cols="30" placeholder="内容を入力してください"></textarea>
-            <button type="submit">追加</button>
+            <button type="submit" id="addTextboxButton">追加</button>
         </form>
 
-        <h4>現在のテキストボックス:</h4>
+        <h4>現在の付箋:</h4>
+        <div class="grid-box">
         <div class="textbox-container">
             {% for textbox in textboxes %}
                 <div class="textbox-wrapper" data-textbox-id="{{ textbox.id }}">
@@ -81,13 +86,18 @@
                             ❤️ <span class="like-count">{{ textbox.like_count or 0 }}</span>
                         </span>                        
                     </div>
-                    <textarea style="width: 200px; height: 200px;" readonly>{{ textbox.content }}</textarea>
+                    <textarea class="editable-textarea" style="width: 200px; height: 200px;" readonly>{{ textbox.content }}</textarea>
+                    <div class="display-div"></div>
                     <form action="/item/{{ item.id }}/delete_textbox/{{ textbox.id }}" method="POST" style="display:inline;">
                         <button type="submit" class="btn-delete">削除</button>
                     </form>
                 </div>
             {% endfor %}
         </div>
+    </div>
+
+
+    </div>
     </div>
 </form>
 {% endblock %}

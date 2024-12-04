@@ -53,6 +53,7 @@ class Group(db.Model):
     members = db.relationship("User", secondary="user_group", back_populates="groups")
     description = db.Column(db.Text, nullable=True)  # グループの説明
     messages = db.relationship('Message', backref='group', lazy=True)  # メッセージとのリレーション
+    roles = db.Column(db.Text, nullable=True)  # 役割分担
 
 class UserGroup(db.Model):
     __tablename__ = 'user_group'
@@ -99,6 +100,8 @@ class TextBox(db.Model):
     item_id = db.Column(db.Integer, db.ForeignKey('item.id'), nullable=False)  # 紐づくアイテム
     item = db.relationship('Item', backref=db.backref('textboxes', lazy=True))  # Itemとのリレーション
     like_count = db.Column(db.Integer, default=0)  # いいねの数を保存する新しいカラム
+    
+
 
 
 
@@ -302,17 +305,18 @@ def item_page(item_id):
     comments = Comment.query.filter_by(item_id=item_id).all()  # アイテムに関連するコメントを取得
 
     if request.method == 'POST':
-        # 項目のタイトル更新処理
-        new_title = request.form.get('new_title')  # フォームから新しいタイトルを取得
-        if new_title:
-            item.title = new_title  # 項目のtitleを更新
-            db.session.commit()
-            flash('項目のタイトルが更新されました！', 'success')
-        else:
-            flash('タイトルは空にできません。', 'error')
+        # 項目のタイトル更新
+        if 'new_title' in request.form:
+            new_title = request.form.get('new_title')
+            if new_title:
+                item.title = new_title
+                db.session.commit()
+                flash('タイトルが更新されました！', 'success')
+            else:
+                flash('タイトルは空にできません。', 'error')
 
         # テーマ追加処理
-        if 'theme_content' in request.form:
+        elif 'theme_content' in request.form:
             theme_content = request.form.get('theme_content')
             if theme_content:
                 new_theme = Theme(content=theme_content, item_id=item_id)
@@ -321,6 +325,8 @@ def item_page(item_id):
                 flash('テーマが追加されました！', 'success')
             else:
                 flash('テーマを入力してください。', 'error')
+
+        return redirect(f'/item/{item_id}')  # リダイレクトして変更を反映
 
         # コメント追加処理（インデックス番号を使用）
         if 'comment_content' in request.form and 'start_index' in request.form and 'end_index' in request.form:
@@ -430,6 +436,149 @@ def like_textbox(textbox_id):
     textbox.like_count += 1  # いいねを1増加
     db.session.commit()
     return jsonify({'like_count': textbox.like_count})  # 更新後のカウントを返す
+
+
+
+
+@app.route('/group/<int:group_id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_group_content(group_id):
+    target = request.args.get('target')  # GETパラメータで対象を指定
+    if not target:
+        flash("編集対象が指定されていません。", "error")
+        return redirect(f'/group/{group_id}')
+    
+    group = Group.query.get_or_404(group_id)
+    
+    if request.method == 'POST':
+        new_content = request.form.get('content')
+        if target == 'テーマ':
+            group.description = new_content
+        elif target == '役割':
+            # 改行区切りのリストをカンマ区切りに変換して保存
+            group.roles = ','.join(line.strip() for line in new_content.splitlines() if line.strip())
+        elif target == 'メモ':
+            new_message = Message(content=new_content, group_id=group_id, user_id=current_user.id)
+            db.session.add(new_message)
+        db.session.commit()
+        flash(f"{target} が更新されました。", "success")
+        return redirect(f'/group/{group_id}')
+
+    current_content = ''
+    if target == 'テーマ':
+        current_content = group.description or ''
+    elif target == '役割':
+        # カンマ区切りのデータを改行区切りに変換
+        current_content = '\n'.join(group.roles.split(',')) if group.roles else ''
+    elif target == 'メモ':
+        current_content = ' '.join([msg.content for msg in group.messages])
+
+    return render_template(
+        'edit.html',
+        title=f"{target} を編集",
+        current_content=current_content,
+        save_url=url_for('edit_group_content', group_id=group_id, target=target),
+        back_url=url_for('group_page', group_id=group_id)
+    )
+
+
+@app.route('/group/save_box', methods=['POST'])
+@login_required
+def save_box():
+    data = request.get_json()  # フロントエンドから送信されたJSONデータを取得
+
+    # データを検証
+    description = data.get('description', '')
+    roles = data.get('roles', [])
+    memo = data.get('memo', [])
+
+    if not description:
+        return jsonify({"success": False, "message": "説明が空です"}), 400
+
+    # グループの新しいデータを保存
+    new_group = Group(
+        description=description,
+        roles=",".join(roles),
+    )
+    db.session.add(new_group)
+
+    # メモを追加
+    for memo_content in memo:
+        new_message = Message(
+            content=memo_content,
+            group=new_group,
+            user_id=current_user.id
+        )
+        db.session.add(new_message)
+
+    # コミット
+    db.session.commit()
+
+    return jsonify({"success": True, "message": "新しいボックスが保存されました！"})
+
+
+@app.route('/textbox/<int:textbox_id>/add_marker', methods=['POST'])
+@login_required
+def add_marker(textbox_id):
+    data = request.json
+    content = data.get('content')
+    start_index = data.get('start_index')
+    end_index = data.get('end_index')
+
+    if not content or start_index is None or end_index is None:
+        return jsonify({"error": "Invalid data"}), 400
+
+    new_comment = Comment(
+        item_id=textbox_id,
+        content=content,
+        start_index=start_index,
+        end_index=end_index,
+        user_id=current_user.id
+    )
+    db.session.add(new_comment)
+    db.session.commit()
+
+    return jsonify({"message": "Marker added successfully!", "comment_id": new_comment.id})
+
+
+@app.route('/textbox/<int:comment_id>/delete_marker', methods=['POST'])
+@login_required
+def delete_marker(comment_id):
+    comment = Comment.query.get_or_404(comment_id)
+
+    if comment.user_id != current_user.id:
+        return jsonify({"error": "Unauthorized"}), 403
+
+    db.session.delete(comment)
+    db.session.commit()
+
+    return jsonify({"message": "Marker deleted successfully!"})
+
+
+@app.route('/item/<int:item_id>/get_markers', methods=['GET'])
+@login_required
+def get_markers(item_id):
+    markers = Comment.query.filter_by(item_id=item_id).all()
+    marker_list = [
+        {
+            "id": marker.id,
+            "content": marker.content,
+            "start_index": marker.start_index,
+            "end_index": marker.end_index,
+            "user_id": marker.user_id,
+        }
+        for marker in markers
+    ]
+    return jsonify(marker_list)
+
+
+
+
+
+
+
+
+    
 
 
 

@@ -45,8 +45,60 @@
 
     </div>
     <div class="board">
-        <h2 id="boardTitle">選択された項目</h2>
-        <textarea id="boardContent" placeholder="ここに内容を入力してください"></textarea>
+        <h2>{{ group.name }}</h2>
+        <!-- 新しい box-box を追加するためのボタン -->
+    <button id="addBoxBtn">新しいテキストボックスを追加</button>
+    <br><br>
+
+    <div class="box-area">
+    
+        <div class="box-box">
+            <h3 class="box-title"><div class=theme>{{ group.description }}</div></h3>
+            <br>
+            <a href="{{ url_for('edit_group_content', group_id=group.id, target='テーマ') }}" class="edit">テーマ編集</a>
+            <a href="{{ url_for('edit_group_content', group_id=group.id, target='役割') }}" class="edit">役割編集</a>
+            <a href="{{ url_for('edit_group_content', group_id=group.id, target='メモ') }}" class="edit">メモ編集</a>
+            <div class="role">
+                <h3 class="role-title">役割分担</h3>
+                <div class="role-role">
+                    <ul>
+                        {% for role in group.roles.split(',') %}
+                            <li>{{ role }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="memo">
+                <h3 class="role-title">メモ</h3>
+                <div class="memo-memo">
+                    {% for message in group.messages %}
+                        <p>{{ message.content }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="box-box">
+            <h3 class="box-title"><div class=theme>テーマ</div></h3>
+            <br>
+            <a href="{{ url_for('edit_group_content', group_id=group.id, target='テーマ') }}" class="edit">テーマ編集</a>
+            <a href="{{ url_for('edit_group_content', group_id=group.id, target='役割') }}" class="edit">役割編集</a>
+            <a href="{{ url_for('edit_group_content', group_id=group.id, target='メモ') }}" class="edit">メモ編集</a>
+            <div class="role">
+                <h3 class="role-title">役割分担</h3>
+                <div class="role-role">
+                </div>
+            </div>
+            <div class="memo">
+                <h3 class="role-title">メモ</h3>
+                <div class="memo-memo">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
     </div>
 </div>
 </form>
