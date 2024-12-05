@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+<form action="{{ save_url }}" method="POST">
+    <textarea name="content" rows="10" cols="50">{{ current_content }}</textarea>
+    <br>
+    <p>※役割を編集する場合のみ、改行するとそのままリスト形式で反映されます</p>
+    <br>
+    <button type="submit">保存</button>
+</form>
+<a href="{{ back_url }}">戻る</a>
+{% endblock %}
+
