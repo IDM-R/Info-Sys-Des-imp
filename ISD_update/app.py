@@ -133,6 +133,15 @@ def signup():
 
         existing_user = User.query.filter_by(username=username).first()
 
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+         return render_template(
+                'signup.html',
+                error_message='そのメールアドレスはすでに登録されています。別のメールアドレスを選んでください。',
+                email=email,
+                username=username)
+
+
         if existing_user:
             error_message = "そのユーザー名は既に使用されています。別のユーザー名を選んでください。"
             return render_template('signup.html', error_message=error_message)
@@ -145,7 +154,7 @@ def signup():
         return redirect('/login')
     return render_template('signup.html')
 
-    
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
