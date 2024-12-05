@@ -1,22 +1,42 @@
-{% extends "base.html" %}
+{% extends "layout.html" %}
+
+{% block title %}
+ユーザー登録 | Nebula
+{% endblock %}
+
+{% block headline %}
+
+{% endblock %}
 
 {% block content %}
 <h1>ユーザー登録</h1>
 <form method="POST" action="/signup">
-    <label for="email">メールアドレス:</label>
-    <input type="email" name="email" required>
+    <div class="form-group">
+        <label for="email">メールアドレス:</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+    </div>
 
-    <label for="username">ユーザー名:</label>
-    <input type="text" name="username" required>
+    <div class="form-group">
+        <label for="username">ユーザー名:</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="Enter name" required>
+    </div>
 
-    <label for="password">パスワード:</label>
-    <input type="password" name="password" required>
+    <div class="form-group">
+        <label for="password">パスワード:</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" required>
+    </div>
 
     {% if error_message %}
-    <div style="color: red;">{{ error_message }}</div>
+    <div class="alert alert-danger" role="alert">
+        {{ error_message }}
+    </div>
     {% endif %}
 
-    <button type="submit">サインアップ</button>
+    <button type="submit" class="btn btn-primary btn-block">サインアップ</button>
     <a href="/login" role="button">すでに登録してある方はこちら</a>
 </form>
+{% endblock %}
+
+{% block footer %}
+T-26-ATM
 {% endblock %}
