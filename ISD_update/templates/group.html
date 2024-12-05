@@ -1,54 +1,68 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <form action="/group/{{ group.id }}" method="POST">
-<nav class="navbar">
+  <nav class="navbar">
     <h1>アイディアメモ</h1>
     <a href="/">ホームに戻る</a>
-</nav>
-<div class="content">
-
+  </nav>
+  <div class="content">
     <div class="app">
-
-        {% if groups %}
-        <ul>
+      {% if groups %}
+      <ul>
         {% for group in groups %}
-            <li class="group-list">
-                <a href="/group/{{ group.id }}">{{ group.name }}</a>
-            </li>
-        {% endfor %}
-        </ul>
-        {% else %}
-        <p>まだグループに所属していません。</p>
-        {% endif %}
-    </div>
-
-    <div class="item">
-        <h3>{{ group.name }}</h3>
-        <input type="text" name="item_title" placeholder="項目を入力" class="item-btn">
-        <button type="submit" id="addItemBtn">項目を追加</button>  <!-- submitに変更 -->
-        
-        {% if items %}
-        <ul>
-        {% for item in items %}
-        <li id="item-{{ item.id }}" class="item">
-            <a href="/item/{{ item.id }}" class="item-link">{{ item.title }}</a>
-            <form action="/group/{{ group.id }}/delete/{{ item.id }}" method="POST" style="display:inline;">
-                <button type="submit" class="btn-delete">削除</button>
-            </form>
+        <li class="group-list">
+          <button href="/group/{{ group.id }}" class="group-list-btn">
+            {{ group.name }}
+          </button>
         </li>
         {% endfor %}
-        </ul>
-        {% else %}
-        <p>まだ項目がありません。</p>
-        {% endif %}
+      </ul>
+      {% else %}
+      <p>まだグループに所属していません。</p>
+      {% endif %}
+    </div>
 
+    <div class="item-p">
+      <h3>{{ group.name }}</h3>
+      <div class="item-grid">
+        <input
+          type="text"
+          name="item_title"
+          placeholder="項目を入力"
+          class="item-btn"
+          id="addItemInput"
+        />
+        <button type="submit" class="item-btn" id="addItemBtn">追加</button>
+        <!-- submitに変更 -->
+      </div>
+
+      {% if items %}
+      <ul>
+        {% for item in items %}
+        <li id="item-{{ item.id }}" class="item">
+          <button href="/item/{{ item.id }}" class="item-link">
+            {{ item.title }}
+          </button>
+          <form
+            action="/group/{{ group.id }}/delete/{{ item.id }}"
+            method="POST"
+            style="display: inline"
+          >
+            <button type="submit" class="btn-delete">削除</button>
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>まだ項目がありません。</p>
+      {% endif %}
     </div>
     <div class="board">
-        <h2 id="boardTitle">選択された項目</h2>
-        <textarea id="boardContent" placeholder="ここに内容を入力してください"></textarea>
+      <h2 id="boardTitle">{{ item.title }}</h2>
+      <textarea
+        id="boardContent"
+        placeholder="ここに内容を入力してください"
+      ></textarea>
     </div>
-</div>
+  </div>
 </form>
 {% endblock %}
-

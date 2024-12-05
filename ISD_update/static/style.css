@@ -1,184 +1,223 @@
-body{
-    margin-top:0;
-    font-family: UD デジタル 教科書体 NP-R;
+body {
+  margin: 0;
+  font-family: UD デジタル 教科書体 NP-R;
 }
-.navbar{
-    margin-top: 0;
-   background-color: #1760a0;
-   display: inline-block;
-   width:100%;
-   border-bottom:solid 1px #dbedf0;
+form {
+  height: 100vh;
 }
-.navbar h1{
-    margin-left: 3%;
+.navbar {
+  margin-top: 0;
+  background-color: #1760a0;
+  display: inline-block;
+  width: 100%;
+  border-bottom: solid 1px#1760a0;
 }
-.content{
-    display: flex;
-    height:100%;
-    width:100%;
+.navbar h1 {
+  margin-left: 3%;
 }
-.app{
-    width:10%;
-    background-color: #1760a0;
-    border-right:solid 1px #dbedf0;
-}
-.item{
-    width:15%;
-    background-color: #1760a0;
-}
-.board{
-    width:75%;
+.content {
+  display: flex;
+  height: 100%;
+  width: 100%;
 }
 
+.app {
+  width: 10%;
+  background-color: #1760a0;
+  border-right: solid 1px #1760a0;
+  margin-right: 0;
+}
+.item-p {
+  width: 20%;
+  background-color: #1760a0;
+  border-right: solid 1px #1760a0;
+}
+.item {
+  width: 100%;
+  background-color: #1760a0;
+  border-right: solid 1px #1760a0;
+}
+.item-link {
+  color: #ccc;
+}
+.display-flex {
+  display: inline-block;
+}
+
+.board {
+  width: 70%;
+  background-color: #20dafb;
+}
+.boardContent {
+  width: 30%;
+  min-height: 100pt;
+  height: auto;
+}
 #itemContainer {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 .box {
-    background-color: #1760a0;
-    border: 1px solid #1760a0;
-    border-radius: 2px;
-    display: inline-block;
-    width:95%;
-    color:#dbedf0;
-    margin-top:20px;
-    font-weight: bold;
-    font-size: 25px;
-    text-align: center;
+  background-color: #1760a0;
+  border: 1px solid #1760a0;
+  border-radius: 2px;
+  display: inline-block;
+  width: 95%;
+  color: #20dafb;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 25px;
+  text-align: center;
 }
-button#addItemBtn{
-    margin:5%;
-    width:90%;
-    color:#dbedf0;
-    background-color: #1760a0;
-    border:solid 1px #dbedf0;
-    border-radius: 5px;
-    margin-top: 0;
-    font-size: 20px;
-    font-family: UD デジタル 教科書体 NP-R;
+button#addItemBtn {
+  margin: 0%;
+  width: 20%;
+  color: #ffffff;
+  background-color: #05bef6;
+  border: solid 1px #ffffff;
+  border-radius: 5px;
+  margin-top: 0;
+
+  font-size: 10pt;
+  font-family: UD デジタル 教科書体 NP-R;
+}
+.addItemInput {
+  flex: auto;
 }
 
-.btn-delete{
-    margin-left: 70%;
+.btn-delete {
+  margin-left: 70%;
 }
 
-.item-btn{
-    margin-top:3%;
-    margin-left: 5%;
-    margin-right: 5%;
-    width:90%;
+.item-btn {
+  margin-top: 0;
+  margin-left: 5%;
+  margin-right: 0;
+  width: 70%;
+  background-color: aqua;
+  border-radius: 4px;
+  cursor: auto;
+  min-width: 10pt;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  transition: all 0.1s ease-out;
+}
+.item-grid {
+  display: flex;
 }
 
-h3{
-    color:#dbedf0;
-    text-align: center;
+h3 {
+  color: #dbedf0;
+  text-align: center;
 }
-.group-list{
-    margin-top: 10%;
-    list-style: none;
-    font-size: 15px;
+.group-list {
+  margin-top: 10%;
+  list-style: none;
+  font-size: 15px;
+}
+.group-list-btn {
+  background-color: #20dafb;
+}
+ul {
+  list-style-type: none;
 }
 .theme-input {
-    margin-bottom: 10px;
-    padding: 5px;
+  margin-bottom: 10px;
+  padding: 5px;
 }
 
 #textboxContainer textarea {
-    border: 1px solid #ccc;
-    font-size: 14px;
-    padding: 5px;
-    resize: none;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  padding: 5px;
+  resize: none;
 }
 .btn-delete {
-    background-color:#072a49;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 3px;
+  background-color: #f854d7;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
 }
 
 .btn-delete:hover {
-    background-color:#072a49;
+  background-color: #f854d7;
 }
 .dynamic-textbox {
-    margin: 10px 0;
-    width: 100%; /* 必要に応じて調整 */
-    max-width: 400px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 10px;
-    font-size: 14px;
+  margin: 10px 0;
+  width: 100%; /* 必要に応じて調整 */
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 14px;
 }
-#textboxContainer{
-    height:50%;
-    width:70%;
+#textboxContainer {
+  height: 50%;
+  width: 70%;
 }
 
 .textbox-container {
-    display: flex; /* 子要素を横並びにする */
-    flex-wrap: wrap; /* 画面幅が足りない場合に改行 */
-    gap: 10px; /* テキストボックス間の余白 */
+  display: flex; /* 子要素を横並びにする */
+  flex-wrap: wrap; /* 画面幅が足りない場合に改行 */
+  gap: 10px; /* テキストボックス間の余白 */
 }
 
 .textbox-wrapper {
-    display: flex;
-    flex-direction: column; /* テキストボックスとボタンを縦に並べる */
-    align-items: center; /* ボタンを中央揃え */
+  display: flex;
+  flex-direction: column; /* テキストボックスとボタンを縦に並べる */
+  align-items: center; /* ボタンを中央揃え */
 }
 @media (max-width: 600px) {
-    .textbox-container {
-        flex-direction: column; /* 小さい画面では縦並びに変更 */
-    }
+  .textbox-container {
+    flex-direction: column; /* 小さい画面では縦並びに変更 */
+  }
 }
 #commentModal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    z-index: 1000;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  z-index: 1000;
 }
 
 .highlighted-text {
-    background-color: yellow;
-    cursor: pointer;
+  background-color: yellow;
+  cursor: pointer;
 }
 
 .textbox-header {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 5px;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
 }
-
 
 .like-button:hover {
-    color: #0056b3;
-    text-decoration: underline;
+  color: #0056b3;
+  text-decoration: underline;
 }
 .textbox-wrapper {
-    position: relative;
-    margin: 10px;
+  position: relative;
+  margin: 10px;
 }
 
 .like-button {
-    cursor: pointer;
-    font-size: 16px;
-    color: gray;
-    display: inline-flex;
-    align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  color: gray;
+  display: inline-flex;
+  align-items: center;
 }
 
 .like-button.liked {
-    color: red; /* いいねされた時の色 */
+  color: red; /* いいねされた時の色 */
 }
-
-
-
-
