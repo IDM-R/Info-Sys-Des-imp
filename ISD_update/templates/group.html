@@ -23,10 +23,12 @@
         {% endif %}
     </div>
 
-    <div class="item">
+    <div class="item-p">
         <h3>{{ group.name }}</h3>
-        <input type="text" name="item_title" placeholder="項目を入力" class="item-btn">
-        <button type="submit" id="addItemBtn">項目を追加</button>  <!-- submitに変更 -->
+        <div class="item-grid">
+        <input type="text" name="item_title" placeholder="項目を入力" class="item-btn" id="addItemInput">
+        <button type="submit" id="addItemBtn">追加</button>  <!-- submitに変更 -->
+        </div>
         
         {% if items %}
         <ul>
