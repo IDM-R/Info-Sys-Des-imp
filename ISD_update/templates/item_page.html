@@ -3,7 +3,12 @@
 <form action="/item/{{ item.id }}" method="POST">
     <nav class="navbar">
         <h1>アイディアメモ</h1>
-        <a href="/">ホームに戻る</a>
+        <div class="home">
+            <a href="/" class="a-img"><img src="{{ url_for('static', filename='home_img.png') }}" alt="home" width="50px" height="50px"></a>
+            <br>
+            <a href="/" class="home-name">home</a>
+        </div>
+
     </nav>
     <div class="content">
         <div class="app">
@@ -46,23 +51,16 @@
             <h2 id="boardTitleHeader" data-item-id="{{ item.id }}">{{ item.title }}</h2>
             <form action="/item/{{ item.id }}" method="POST">
                 <input type="text" name="new_title" id="boardTitleInput" value="{{ item.title }}" placeholder="タイトルを入力してください">
-                <button type="submit" id="saveTitleBtn">保存</button>
+                <button type="submit" id="saveTitleBtn" class="btn">保存</button>
             </form>
 
-            <hr>
-
-            <!-- 新しいテーマを入力するフォーム -->
-            <form action="/item/{{ item.id }}" method="POST">
-                <input type="hidden" name="action" value="add_theme"> <!-- フォームの種類を指定 -->
-                <input type="text" name="theme_content" id="themeInput" placeholder="テーマを入力">
-                <button type="submit">テーマを追加</button>
-            </form>
+            <br>
 
         <!-- 現在のテーマを表示 -->
         <h4>現在のテーマ:</h4>
         <ul>
             {% for theme in themes %}
-                <li>
+                <li class="theme-list">
                     {{ theme.content }}
                     <form action="/item/{{ item.id }}/delete_theme/{{ theme.id }}" method="POST" style="display:inline;">
                         <button type="submit" class="btn-delete">削除</button>
@@ -70,11 +68,17 @@
                 </li>
             {% endfor %}
         </ul>
+        <!-- 新しいテーマを入力するフォーム -->
+        <form action="/item/{{ item.id }}" method="POST">
+            <input type="hidden" name="action" value="add_theme"> <!-- フォームの種類を指定 -->
+            <input type="text" name="theme_content" id="themeInput" placeholder="テーマを入力">
+            <button type="submit" class="btn">テーマを追加</button>
+        </form>
 
         <h4>新しい付箋を追加:</h4>
         <form action="/item/{{ item.id }}/add_textbox" method="POST">
-            <textarea name="textbox_content" rows="10" cols="30" placeholder="内容を入力してください"></textarea>
-            <button type="submit" id="addTextboxButton">追加</button>
+            <textarea name="textbox_content" rows="10" cols="30" placeholder="意見を入力"></textarea>
+            <button type="submit" id="addTextboxButton" class="btn">追加</button>
         </form>
 
         <h4>現在の付箋:</h4>
@@ -89,7 +93,7 @@
                     </div>
                     <textarea class="editable-textarea" style="width: 200px; height: 200px;" readonly>{{ textbox.content }}</textarea>
                     <div class="display-div"></div>
-                    <form action="/item/{{ item.id }}/delete_textbox/{{ textbox.id }}" method="POST" style="display:inline;">
+                    <form action="/item/{{ item.id }}/delete_textbox/{{ textbox.id }}" method="POST" style="display:inline;" class="form">
                         <button type="submit" class="btn-delete">削除</button>
                     </form>
                 </div>

@@ -1,6 +1,6 @@
 body{
     margin-top:0;
-    font-family: UD デジタル 教科書体 NP-R;
+    font-family: Zen Maru Gothic;
 }
 .navbar{
     margin-top: 0;
@@ -8,13 +8,42 @@ body{
    display: inline-block;
    width:100%;
    border-bottom:solid 1px #dbedf0;
+   display: flex;
+}
+.navbar1 h1{
+    margin-left: 3%;
+    color: #dbedf0;
+    width:30%;
+}
+.navbar1{
+    margin-top: 0;
+   background-color: #1760a0;
+   display: inline-block;
+   width:100%;
+   border-bottom:solid 1px #dbedf0;
+   display: flex;
 }
 .navbar h1{
     margin-left: 3%;
+    color: #dbedf0;
+    width:30%;
+}
+.home{
+    width:70%;
+    margin-left:30%;
+}
+.navbar a{
+    color:#dbedf0;
+    font-size: 18px;
+    margin-left:90%
+}
+.logout{
+    margin-left:85%;
+    color:#dbedf0
 }
 .content{
     display: flex;
-    height:100vh;
+    height:300vh;
     width:100%;
 }
 #trend_notification_app{
@@ -38,7 +67,9 @@ body{
 .board{
     width:75%;
 }
-
+#boardTitleHeader{
+    border-bottom: #c7e9ef solid 1.5px;
+}
 #itemContainer {
     margin-top: 20px;
 }
@@ -63,7 +94,6 @@ button#addItemBtn{
     border-radius: 5px;
     margin-top: 0;
     font-size: 20px;
-    font-family: UD デジタル 教科書体 NP-R;
 }
 
 button#addItemBtn {
@@ -77,7 +107,6 @@ button#addItemBtn {
   
     font-size: 10pt;
     font-weight: 500;
-    font-family: UD デジタル 教科書体 NP-R;
 }
 .addItemInput {
     flex: auto;
@@ -85,7 +114,10 @@ button#addItemBtn {
 .btn-delete{
     margin-left: 70%;
 }
-
+.form{
+    margin:0;
+    width:100%;
+}
 .item-btn{
     margin-top:0;
     margin-left: 5%;
@@ -177,10 +209,7 @@ h3{
     z-index: 1000;
 }
 
-.highlighted-text {
-    background-color: yellow;
-    cursor: pointer;
-}
+
 
 .textbox-header {
     position: absolute;
@@ -214,7 +243,17 @@ h3{
 .like-button.liked {
     color: red; /* いいねされた時の色 */
 }
-
+.app ul{
+    padding-left:0;
+}
+.group-list{
+    text-align: center;
+    list-style: none;
+    font-size: 20px;
+}
+.group-list a{
+    color: #dbedf0;
+}
 #messageBox {
     display: none;
     position: absolute;
@@ -261,7 +300,6 @@ h3{
 }
 .box-title{
     color:#1760a0;
-    font-family:UD デジタル 教科書体 NP-R ;
     font-weight: 700;
     font-size: 25px;
     margin-bottom: 1%;
@@ -301,7 +339,7 @@ a.edit{
 
 
 .highlight {
-    background-color: yellow;
+    background-color: #1760a090;
     display: inline;
 }
 /* ボタンが他の要素よりも前に表示されるようにする */
@@ -333,10 +371,10 @@ a.edit{
 
 
 .textbox-container {
-    width:30%;
-    display: flex;
-    flex-direction: column; /* 縦並びにする */
-    gap: 10px; /* テキストボックス間にスペースを追加 */
+    width:100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 5px; /* テキストボックス間にスペースを追加 */
 }
 
 
@@ -358,9 +396,32 @@ a.edit{
     gap: 10px; /* 内部要素間のスペース */
     padding: 10px;
     background-color: #f6b7a2; /* テキストボックスの背景色 */
-    border-radius: 8px;
+    border-radius: 3px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+    padding-right:1%;
+    font-family: UD デジタル 教科書体 NP-R;
 }
 
+input{
+    height:20px;
+    background-color:aliceblue;
+    border-color: #dbedf0;
+    color:#072a49;
+}
+input:focus {
+    border: 2px inset #75a0c5;
+    outline: none;
+    box-shadow: 0 0 10px 1px rgba(100,100,65, .5);
+}
+.btn{
+    background-color: aliceblue;
+    border: solid 2px #dbedf0;
+    color:#75a0c5;
+    font-weight: 600;
+    font-family: Zen Maru Gothic;
+}
+.theme-list{
+    font-family: UD デジタル 教科書体 NP-R;
+}
 
 

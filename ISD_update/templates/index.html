@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<nav class="navbar">
+<nav class="navbar1">
     <h1>アイディアメモ</h1>
-    <a href="/logout" role="button">ログアウト</a>
+    <div class="home">
+        <a href="/logout" role="button" class="logout">ログアウト</a>
+    </div>
 </nav>
 <div class="content">
 
@@ -20,7 +22,7 @@
     {% endif %}
     </div>
 
-    <div class="item">
+    <div class="item-p">
     </div>
     <div class="board">
     </div>

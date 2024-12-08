@@ -2,10 +2,15 @@
 
 {% block content %}
 <form action="/group/{{ group.id }}" method="POST">
-<nav class="navbar">
-    <h1>アイディアメモ</h1>
-    <a href="/">ホームに戻る</a>
-</nav>
+    <nav class="navbar">
+        <h1>アイディアメモ</h1>
+        <div class="home">
+            <a href="/" class="a-img"><img src="{{ url_for('static', filename='home_img.png') }}" alt="home" width="50px" height="50px"></a>
+            <br>
+            <a href="/" class="home-name">home</a>
+        </div>
+
+    </nav>
 <div class="content">
 
     <div class="app">
@@ -49,7 +54,7 @@
     <div class="board">
         <h2>{{ group.name }}</h2>
         <!-- 新しい box-box を追加するためのボタン -->
-    <button id="addBoxBtn">新しいテキストボックスを追加</button>
+    <button id="addBoxBtn" class="btn">新しいテキストボックスを追加</button>
     <br><br>
 
     <div class="box-area">
