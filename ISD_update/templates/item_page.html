@@ -50,7 +50,7 @@
         <div class="board">
             <h2 id="boardTitleHeader" data-item-id="{{ item.id }}">{{ item.title }}</h2>
             <form action="/item/{{ item.id }}" method="POST">
-                <input type="text" name="new_title" id="boardTitleInput" value="{{ item.title }}" placeholder="タイトルを入力してください">
+                <input type="text" name="new_title" id="boardTitleInput" value="{{ item.title }}" placeholder="タイトルを入力してください" class="case">
                 <button type="submit" id="saveTitleBtn" class="btn">保存</button>
             </form>
 
@@ -71,13 +71,13 @@
         <!-- 新しいテーマを入力するフォーム -->
         <form action="/item/{{ item.id }}" method="POST">
             <input type="hidden" name="action" value="add_theme"> <!-- フォームの種類を指定 -->
-            <input type="text" name="theme_content" id="themeInput" placeholder="テーマを入力">
+            <input type="text" name="theme_content" id="themeInput" placeholder="テーマを入力" class="case">
             <button type="submit" class="btn">テーマを追加</button>
         </form>
 
         <h4>新しい付箋を追加:</h4>
         <form action="/item/{{ item.id }}/add_textbox" method="POST">
-            <textarea name="textbox_content" rows="10" cols="30" placeholder="意見を入力"></textarea>
+            <textarea name="textbox_content" rows="10" cols="30" placeholder="意見を入力" class="opinion"></textarea>
             <button type="submit" id="addTextboxButton" class="btn">追加</button>
         </form>
 

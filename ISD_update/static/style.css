@@ -129,8 +129,17 @@ button#addItemBtn {
   min-width: 10pt;
   display: flex;
   justify-content: center;
-  font-weight: bold;
+  font-family: Zen Maru Gothic;
   transition: all 0.1s ease-out;
+  font-weight: 500;
+}
+.case{
+    font-family: Zen Maru Gothic;
+    font-weight: 500;
+}
+.opinion{
+    font-family: Zen Maru Gothic;
+    font-weight: 500;
 }
 .item-grid {
     display: flex;
