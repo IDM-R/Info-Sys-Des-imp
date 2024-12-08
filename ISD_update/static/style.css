@@ -414,11 +414,13 @@ input:focus {
     box-shadow: 0 0 10px 1px rgba(100,100,65, .5);
 }
 .btn{
-    background-color: aliceblue;
-    border: solid 2px #dbedf0;
-    color:#75a0c5;
-    font-weight: 600;
+    background-color: #1760a0;
+    height:27px;
+    font-weight: 500;
+    border: none;
+    color:#fff;
     font-family: Zen Maru Gothic;
+    border-radius: 5px;
 }
 .theme-list{
     font-family: UD デジタル 教科書体 NP-R;
