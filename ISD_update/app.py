@@ -458,6 +458,8 @@ def edit_group_content(group_id):
             # 改行区切りのリストをカンマ区切りに変換して保存
             group.roles = ','.join(line.strip() for line in new_content.splitlines() if line.strip())
         elif target == 'メモ':
+            # メモを削除して、新しいメモのみを保存
+            Message.query.filter_by(group_id=group_id).delete()  # 既存のメモを削除
             new_message = Message(content=new_content, group_id=group_id, user_id=current_user.id)
             db.session.add(new_message)
         db.session.commit()
@@ -471,7 +473,7 @@ def edit_group_content(group_id):
         # カンマ区切りのデータを改行区切りに変換
         current_content = '\n'.join(group.roles.split(',')) if group.roles else ''
     elif target == 'メモ':
-        current_content = ' '.join([msg.content for msg in group.messages])
+        current_content = ''  # メモ編集時には空にして新しい内容を入力させる
 
     return render_template(
         'edit.html',
@@ -480,6 +482,7 @@ def edit_group_content(group_id):
         save_url=url_for('edit_group_content', group_id=group_id, target=target),
         back_url=url_for('group_page', group_id=group_id)
     )
+
 
 
 @app.route('/group/save_box', methods=['POST'])

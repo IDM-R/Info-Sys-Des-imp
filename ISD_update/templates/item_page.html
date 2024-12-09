@@ -63,10 +63,14 @@
         <ul>
             {% for theme in themes %}
                 <li class="theme-list">
-                    {{ theme.content }}
+                    <div class="theme-corner">
+                    <div class="theme-theme">
+                        {{ theme.content }}
+                    </div>
                     <form action="/item/{{ item.id }}/delete_theme/{{ theme.id }}" method="POST" style="display:inline;">
                         <button type="submit" class="btn-delete">削除</button>
                     </form>
+                    </div>
                 </li>
             {% endfor %}
         </ul>
