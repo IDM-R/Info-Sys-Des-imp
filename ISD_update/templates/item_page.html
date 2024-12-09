@@ -32,13 +32,15 @@
             </div>
         
         {% if items %}
-        <ul>
+        <ul class="item-ul">
         {% for item in items %}
         <li id="item-{{ item.id }}" class="item">
+            <div class="item-corner"> 
             <a href="/item/{{ item.id }}" class="item-link">{{ item.title }}</a>  <!-- item.title を表示 -->
-            <form action="/group/{{ group.id }}/delete/{{ item.id }}" method="POST" style="display:inline;">
+            <form action="/group/{{ group.id }}/delete/{{ item.id }}" method="POST" style="display:inline;" class="item-form">
                 <button type="submit" class="btn-delete">削除</button>
             </form>
+            </div>
         </li>
         {% endfor %}
         </ul>

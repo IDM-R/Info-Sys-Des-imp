@@ -46,6 +46,9 @@ body{
     height:300vh;
     width:100%;
 }
+li{
+    list-style: none;
+}
 #trend_notification_app{
     background-color: #1760a0;
 }
@@ -63,6 +66,18 @@ body{
     width: 100%;
     background-color: #1760a0;
     border-right: solid 1px #1760a0;
+}
+.item-corner{
+    display: flex;
+    margin-top:3%;
+}
+.item-link{
+    width:80%;
+}
+.item-ul{
+    padding-left:3px;
+    margin-left:10px;
+    margin-right:10px;
 }
 .board{
     width:75%;
@@ -107,6 +122,7 @@ button#addItemBtn {
   
     font-size: 10pt;
     font-weight: 500;
+    font-family: Zen Maru Gothic;
 }
 .addItemInput {
     flex: auto;
@@ -166,12 +182,15 @@ h3{
     resize: none;
 }
 .btn-delete {
-    background-color:#072a49;
+    background-color:#1760a0;
     color: white;
-    border: none;
+    border: solid #fff 1.5px;
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 3px;
+    margin-left:0;
+    border-radius: 5px;
+    font-family: Zen Maru Gothic;
 }
 
 .btn-delete:hover {
