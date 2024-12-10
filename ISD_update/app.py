@@ -282,15 +282,28 @@ def edit_item(group_id, item_id):
 def delete_item(group_id, item_id):
     item = Item.query.get_or_404(item_id)
 
+    # グループと一致しているか確認
     if item.group_id != group_id:
-        flash('無効な操作です。', 'error')
+        flash('不正なリクエストです。', 'error')
         return redirect(f'/group/{group_id}')
 
+    # アイテムに関連付けられたテーマを削除
+    themes = Theme.query.filter_by(item_id=item_id).all()
+    for theme in themes:
+        db.session.delete(theme)
+
+    # アイテムに関連付けられたTextBoxを削除
+    text_boxes = TextBox.query.filter_by(item_id=item_id).all()
+    for textbox in text_boxes:
+        db.session.delete(textbox)
+
+    # アイテム自体を削除
     db.session.delete(item)
     db.session.commit()
-
-    flash('項目が削除されました！', 'success')
+    flash('アイテムと関連するデータが削除されました。', 'success')
     return redirect(f'/group/{group_id}')
+
+
 
 
 @app.route('/item/<int:item_id>', methods=['GET', 'POST'])
@@ -403,13 +416,20 @@ def delete_theme(item_id, theme_id):
 @app.route('/item/<int:item_id>/add_textbox', methods=['POST'])
 @login_required
 def add_textbox(item_id):
+    item = Item.query.get_or_404(item_id)  # アイテムが存在しない場合404エラーを発生させる
     content = request.form.get('textbox_content', '')  # フォームから内容を取得
-    # 新しいテキストボックスを作成、like_countを初期値として0に設定
-    new_textbox = TextBox(content=content, item_id=item_id, like_count=0)
+
+    if not content:
+        flash('テキストボックスの内容が空です。', 'error')
+        return redirect(f'/item/{item_id}')
+    
+    # 新しいテキストボックスを作成
+    new_textbox = TextBox(content=content, item_id=item.id, like_count=0)
     db.session.add(new_textbox)
     db.session.commit()
     flash('新しいテキストボックスを追加しました！', 'success')
     return redirect(f'/item/{item_id}')
+
 
 
 
