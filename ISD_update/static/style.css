@@ -2,6 +2,26 @@ body{
     margin-top:0;
     font-family: Zen Maru Gothic;
 }
+.creation{
+    font-size:15px;
+    color: #dbedf0;
+}
+.app-creation{
+    display: flex;
+}
+.app-creation img{
+    margin:5% 0;
+}
+.app-creation a{
+    margin:5% 1%;
+}
+.group-creation{
+    width:60%;
+    margin:5% 0;
+}
+a.creation:hover{
+    color:#75a0c5
+}
 .navbar{
     margin-top: 0;
    background-color: #1760a0;

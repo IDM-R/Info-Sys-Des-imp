@@ -1,6 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+<nav class="navbar">
+    <h1>アイディアメモ</h1>
+    <div class="home">
+        <a href="/" class="a-img"><img src="{{ url_for('static', filename='home_img.png') }}" alt="home" width="50px" height="50px"></a>
+        <br>
+        <a href="/" class="home-name">home</a>
+    </div>
+
+</nav>
+
 <h1>{{ title }}</h1>
 <form action="{{ save_url }}" method="POST">
     <textarea name="content" rows="10" cols="50">{{ current_content }}</textarea>

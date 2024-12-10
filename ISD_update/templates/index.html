@@ -10,7 +10,6 @@
 <div class="content">
 
     <div class="app">
-        <a href="/create_group" type="button">グループを作成</a>
     {% if groups %}
     <ul>
             {% for group in groups %}
@@ -20,6 +19,10 @@
     {% else %}
     <p>まだグループに所属していません。</p>
     {% endif %}
+    <div class="app-creation">
+        <a href="/create_group"><img src="{{ url_for('static', filename='creation_img.png') }}" alt="" width="20px" height="20px"></a>
+        <a href="/create_group" type="button" class="creation" class="group-creation">グループを作成</a>
+        </div>
     </div>
 
     <div class="item-p">
