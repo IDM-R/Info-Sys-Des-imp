@@ -221,6 +221,9 @@ def group_page(group_id):
     items = Item.query.filter_by(group_id=group_id).all()  # グループに関連するアイテムを取得
     members=group.members
 
+    group.roles = group.roles or ""
+
+
     # アイテムごとのテーマを取得
     for item in items:
         item.themes  # これで関連するテーマを取得可能
@@ -490,8 +493,11 @@ def edit_group_content(group_id):
     if target == 'テーマ':
         current_content = group.description or ''
     elif target == '役割':
-        # カンマ区切りのデータを改行区切りに変換
-        current_content = '\n'.join(group.roles.split(',')) if group.roles else ''
+            current_content = '\n'.join(group.roles.split(',')) if group.roles else ''
+    # 修正後
+            current_content = '\n'.join(group.roles.split(',')) if group.roles else ''
+            group.roles = group.roles or ""  # デフォルト空文字列を設定
+
     elif target == 'メモ':
         current_content = ''  # メモ編集時には空にして新しい内容を入力させる
 
