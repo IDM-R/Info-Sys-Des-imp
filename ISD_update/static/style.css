@@ -235,7 +235,7 @@ h3{
 .opinion{
     background-color: aliceblue;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-left:15%;
+    margin-left:5%;
 }
 .textbox-wrapper {
     display: flex;
@@ -473,6 +473,9 @@ input:focus {
 }
 .theme-list{
     font-family: UD デジタル 教科書体 NP-R;
+}
+.board{
+    margin-left:10px;
 }
 
 
