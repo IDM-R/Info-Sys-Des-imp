@@ -124,7 +124,7 @@ def index():
     if request.method == 'GET':
         posts = Post.query.all()
         user_groups = current_user.groups
-        return render_template('index.html', posts=posts, groups=user_groups)
+        return render_template('index.html', posts=posts, groups=user_groups, current_user=current_user)
 
     
 @app.route('/signup', methods=['GET', 'POST'])

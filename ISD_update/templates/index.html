@@ -2,7 +2,7 @@
 
 {% block content %}
 <nav class="navbar1">
-    <h1>アイディアメモ</h1>
+    <h1>Kassia</h1>
     <div class="home">
         <a href="/logout" role="button" class="logout">ログアウト</a>
     </div>
@@ -28,6 +28,21 @@
     <div class="item-p">
     </div>
     <div class="board">
+        <div class="user-info">
+            <p>ログイン中のユーザー: <span class="username">{{ current_user.username }}</span></p>
+        </div>
+        <div class="board-group">
+            <h2>所属しているグループリスト</h2>
+        {% if groups %}
+        <ul>
+            {% for group in groups %}
+                <li class="group-list"><a href="/group/{{ group.id }}">{{ group.name }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+    <p>まだグループに所属していません。</p>
+        {% endif %}
+        </div>
     </div>
 </div>
 <script src="{{ url_for('static', filename='script.js') }}"></script>
