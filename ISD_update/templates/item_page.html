@@ -4,7 +4,7 @@
     <nav class="navbar">
         <h1>Kassia</h1>
         <div class="home">
-            <a href="/isdapp" class="a-img"><img src="{{ url_for('static', filename='home_img.png') }}" alt="home" width="50px" height="50px"></a>
+            <a href="/isdapp" class="a-img"><img src="/isdapp/static/home_img.png" alt="home" width="50px" height="50px"></a>
             <br>
             <a href="/isdapp" class="home-name">home</a>
         </div>
@@ -22,7 +22,7 @@
             <p>まだグループに所属していません。</p>
             {% endif %}
             <div class="app-creation">
-                <a href="/isdapp/create_group"><img src="{{ url_for('static', filename='creation_img.png') }}" alt="" width="20px" height="20px"></a>
+                <a href="/isdapp/create_group"><img src="/isdapp/static/creation_img.png" alt="" width="20px" height="20px"></a>
                 <a href="/isdapp/create_group" type="button" class="creation" class="group-creation">グループを作成</a>
                 </div>
             </div>
