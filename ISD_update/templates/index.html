@@ -4,7 +4,7 @@
 <nav class="navbar1">
     <h1>Kassia</h1>
     <div class="home">
-        <a href="/logout" role="button" class="logout">ログアウト</a>
+        <a href="/isdapp/logout" role="button" class="logout">ログアウト</a>
     </div>
 </nav>
 <div class="content">
@@ -13,15 +13,15 @@
     {% if groups %}
     <ul>
             {% for group in groups %}
-                <li class="group-list"><a href="/group/{{ group.id }}">{{ group.name }}</a></li>
+                <li class="group-list"><a href="/isdapp/group/{{ group.id }}">{{ group.name }}</a></li>
             {% endfor %}
     </ul>
     {% else %}
     <p>まだグループに所属していません。</p>
     {% endif %}
     <div class="app-creation">
-        <a href="/create_group"><img src="{{ url_for('static', filename='creation_img.png') }}" alt="" width="20px" height="20px"></a>
-        <a href="/create_group" type="button" class="creation" class="group-creation">グループを作成</a>
+        <a href="/isdapp/create_group"><img src="{{ url_for('static', filename='creation_img.png') }}" alt="" width="20px" height="20px"></a>
+        <a href="/isdapp/create_group" type="button" class="creation" class="group-creation">グループを作成</a>
         </div>
     </div>
 
@@ -36,7 +36,7 @@
         {% if groups %}
         <ul>
             {% for group in groups %}
-                <li class="group-list"><a href="/group/{{ group.id }}">{{ group.name }}</a></li>
+                <li class="group-list"><a href="/isdapp/group/{{ group.id }}">{{ group.name }}</a></li>
             {% endfor %}
         </ul>
         {% else %}

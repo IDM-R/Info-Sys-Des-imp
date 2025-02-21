@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<form action="/item/{{ item.id }}" method="POST">
+<form action="/isdapp/item/{{ item.id }}" method="POST">
     <nav class="navbar">
         <h1>Kassia</h1>
         <div class="home">
-            <a href="/" class="a-img"><img src="{{ url_for('static', filename='home_img.png') }}" alt="home" width="50px" height="50px"></a>
+            <a href="/isdapp" class="a-img"><img src="{{ url_for('static', filename='home_img.png') }}" alt="home" width="50px" height="50px"></a>
             <br>
-            <a href="/" class="home-name">home</a>
+            <a href="/isdapp" class="home-name">home</a>
         </div>
 
     </nav>
@@ -15,21 +15,21 @@
             {% if groups %}
             <ul>
                     {% for group in groups %}
-                        <li class="group-list"><a href="/group/{{ group.id }}">{{ group.name }}</a></li>
+                        <li class="group-list"><a href="/isdapp/group/{{ group.id }}">{{ group.name }}</a></li>
                     {% endfor %}
             </ul>
             {% else %}
             <p>まだグループに所属していません。</p>
             {% endif %}
             <div class="app-creation">
-                <a href="/create_group"><img src="{{ url_for('static', filename='creation_img.png') }}" alt="" width="20px" height="20px"></a>
-                <a href="/create_group" type="button" class="creation" class="group-creation">グループを作成</a>
+                <a href="/isdapp/create_group"><img src="{{ url_for('static', filename='creation_img.png') }}" alt="" width="20px" height="20px"></a>
+                <a href="/isdapp/create_group" type="button" class="creation" class="group-creation">グループを作成</a>
                 </div>
             </div>
         <div class="item-p">
             <h3>{{ group.name }}</h3>
             <div class="item-grid">
-            <form action="/item/{{ item.id }}" method="POST">
+            <form action="/isdapp/item/{{ item.id }}" method="POST">
                 <input type="text" name="item_title" placeholder="項目を入力" class="item-btn" id="addItemInput">
                 <button type="submit" id="addItemBtn">追加</button>
             </form>  <!-- submitに変更 -->
@@ -40,8 +40,8 @@
         {% for item in items %}
         <li id="item-{{ item.id }}" class="item">
             <div class="item-corner"> 
-            <a href="/item/{{ item.id }}" class="item-link">{{ item.title }}</a>  <!-- item.title を表示 -->
-            <form action="/group/{{ group.id }}/delete/{{ item.id }}" method="POST" style="display:inline;" class="item-form">
+            <a href="/isdapp/item/{{ item.id }}" class="item-link">{{ item.title }}</a>  <!-- item.title を表示 -->
+            <form action="/isdapp/group/{{ group.id }}/delete/{{ item.id }}" method="POST" style="display:inline;" class="item-form">
                 <button type="submit" class="btn-delete">削除</button>
             </form>
             </div>
@@ -55,7 +55,7 @@
         </div>
         <div class="board">
             <h2 id="boardTitleHeader" data-item-id="{{ item.id }}">{{ item.title }}</h2>
-            <form action="/item/{{ item.id }}" method="POST">
+            <form action="/isdapp/item/{{ item.id }}" method="POST">
                 <input type="text" name="new_title" id="boardTitleInput" value="{{ item.title }}" placeholder="タイトルを入力してください" class="case">
                 <button type="submit" id="saveTitleBtn" class="btn">保存</button>
             </form>
@@ -71,7 +71,7 @@
                     <div class="theme-theme">
                         {{ theme.content }}
                     </div>
-                    <form action="/item/{{ item.id }}/delete_theme/{{ theme.id }}" method="POST" style="display:inline;">
+                    <form action="/isdapp/item/{{ item.id }}/delete_theme/{{ theme.id }}" method="POST" style="display:inline;">
                         <button type="submit" class="btn-delete">削除</button>
                     </form>
                     </div>
@@ -79,14 +79,14 @@
             {% endfor %}
         </ul>
         <!-- 新しいテーマを入力するフォーム -->
-        <form action="/item/{{ item.id }}" method="POST">
+        <form action="/isdapp/item/{{ item.id }}" method="POST">
             <input type="hidden" name="action" value="add_theme"> <!-- フォームの種類を指定 -->
             <input type="text" name="theme_content" id="themeInput" placeholder="テーマを入力" class="case">
             <button type="submit" class="btn">テーマを追加</button>
         </form>
 
         <h4>新しい付箋を追加:</h4>
-        <form action="/item/{{ item.id }}/add_textbox" method="POST">
+        <form action="/isdapp/item/{{ item.id }}/add_textbox" method="POST">
             <textarea name="textbox_content" rows="10" cols="30" placeholder="意見を入力" class="opinion"></textarea>
             <button type="submit" id="addTextboxButton" class="btn">追加</button>
         </form>
@@ -103,7 +103,7 @@
                     </div>
                     <textarea class="editable-textarea" style="width: 200px; height: 200px;" readonly>{{ textbox.content }}</textarea>
                     <div class="display-div"></div>
-                    <form action="/item/{{ item.id }}/delete_textbox/{{ textbox.id }}" method="POST" style="display:inline;" class="form">
+                    <form action="/isdapp/item/{{ item.id }}/delete_textbox/{{ textbox.id }}" method="POST" style="display:inline;" class="form">
                         <button type="submit" class="btn-delete">削除</button>
                     </form>
                 </div>
