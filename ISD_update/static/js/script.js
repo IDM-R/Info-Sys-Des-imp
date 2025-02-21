@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', function () {
             const textboxId = button.dataset.textboxId;
             const likeCountSpan = button.querySelector('.like-count');
-            fetch(`/textbox/${textboxId}/like`, {
+            fetch(`/isdapp/textbox/${textboxId}/like`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
