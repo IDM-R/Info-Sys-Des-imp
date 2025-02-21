@@ -474,14 +474,19 @@ def edit_group_content(group_id):
     group = Group.query.get_or_404(group_id)
     
     if request.method == 'POST':
+        print(target)
         new_content = request.form.get('content')
+        print(new_content)
         if target == 'テーマ':
+            print("てーま")
             group.description = new_content
         elif target == '役割':
             # 改行区切りのリストをカンマ区切りに変換して保存
+            print("やくあり")
             group.roles = ','.join(line.strip() for line in new_content.splitlines() if line.strip())
         elif target == 'メモ':
             # メモを削除して、新しいメモのみを保存
+            print("memo")
             Message.query.filter_by(group_id=group_id).delete()  # 既存のメモを削除
             new_message = Message(content=new_content, group_id=group_id, user_id=current_user.id)
             db.session.add(new_message)
