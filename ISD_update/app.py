@@ -602,17 +602,6 @@ def get_markers(item_id):
 
 
 
-
-
-
-
-
-    
-
-
-
-
-
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='localhost')
+    app.run(host='localhost', port=3456)
